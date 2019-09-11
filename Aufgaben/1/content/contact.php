@@ -1,14 +1,26 @@
 <?php
 
-if (isset($_POST['do-submit'])) {
+if (isset($_POST['do-submit'])) { // wenn das Formular abgeschickt wurde
     var_dump($_POST);
     $name = $_POST['name'];
 
+    /**
+     * brauchen wir später
+     */
     $errors = [];
 
-    if (isset($_POST['email']) && strlen($_POST['email']) > 0) {
-        $email = trim($_POST['email']);
-        // prüfen, ob es eine email-adresse ist oder nur irgendein string
+    /**
+     * Validierung: Email Feld
+     */
+    if (isset($_POST['email']) && strlen($_POST['email']) > 0) { // wenn eine Email-Adresse angegeben wurde
+        $email = trim($_POST['email']); // Whitespace am Anfang und Ende wegschneiden
+
+        /**
+         * prüfen, ob es der eingegebene Wert eine Email-Adresse sein könnte oder nicht
+         *
+         * Hinweis: die Bedingungen in dem if-Block stehen in mehreren Zeilen, damit der Code übersichtlicher ist
+         * und nicht die ganze if-Zeile ewig lang wird :)
+         */
         if (
                 strlen($email) < 5 ||
                 strpos($email, '@') < 2 ||
@@ -16,10 +28,9 @@ if (isset($_POST['do-submit'])) {
         ) {
             $errors['email'] = 'Bitte geben sie eine VALIDE!! Email-Adresse ein.';
         }
-    } else {
+    } else { // es wurde keine Email-Adresse angegeben
         $errors['email'] = 'Bitte Email-Adresse eingeben!';
     }
-
 }
 
 ?>
@@ -32,6 +43,12 @@ if (isset($_POST['do-submit'])) {
         <label for="email">Email *</label>
         <input type="text" name="email">
         <?php
+        /**
+         * Wenn es es einen Fehler zur Email-Adresse gibt, zeigen wir ihn hier an.
+         *
+         * Hinweis: die Rufzeichen dienen nur dazu, dass wir im Browser den Fehler sofort als solchen sehen. In der
+         * Praxis machen wir natürlich keine Rufzeichen, sondern lassen den Fehler mit CSS hübsch aber warnend ausschauen.
+         */
         if (isset($errors['email'])) {
             echo "<p>!!!!!!" . $errors['email'] . "</p>";
         }
