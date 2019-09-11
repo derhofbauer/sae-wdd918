@@ -11,7 +11,18 @@ Wer gerne Docker/Docker Compose nutzen möchte, findet ein entsprechendes File i
 ### Database
 + MariaDB: [localhost:3306](localhost:3306)
 
-## Nützliche Informationen
+## Nützliche Informationen & Links
+
++ PHP Docs: https://www.php.net/
++ MySQL Docs: https://dev.mysql.com/doc/
++ GIT Flow: https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow
+
+### Cheatsheets
+
++ Markdown: https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet
++ GIT: https://www.atlassian.com/git/tutorials/atlassian-git-cheatsheet
++ https://devhints.io/
++ http://cheat.sh/
 
 ### Alternative Datenbanksysteme
 
