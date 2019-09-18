@@ -16,6 +16,7 @@ Wer gerne Docker/Docker Compose nutzen möchte, findet ein entsprechendes File i
 + PHP Docs: https://www.php.net/
 + MySQL Docs: https://dev.mysql.com/doc/
 + GIT Flow: https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow
++ https://learngitbranching.js.org/
 
 ### Cheatsheets
 

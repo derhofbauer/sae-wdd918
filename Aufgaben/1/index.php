@@ -1,3 +1,10 @@
+<?php
+/**
+ * Hier kommen alle Includes hin
+ */
+require_once 'includes/redirect.php';
+?>
+
 <?php require_once 'partials/header.php'; ?>
 
 <?php
@@ -16,6 +23,8 @@ if (isset($_GET['page'])) {
         require_once 'content/home.php';
     } elseif ($page === 'contact') {
         require_once 'content/contact.php';
+    } elseif ($page === 'links') {
+        require_once 'content/links.php';
     } elseif ($page === 'admin') {
         require_once 'content/admin.php';
     } else { // der GET-Parameter 'page' hat einen Wert, zu dem wir keinen Inhalt haben.
@@ -24,6 +33,8 @@ if (isset($_GET['page'])) {
 } else { // der GET-Parameter 'page' wurde nicht angegeben
     require_once 'content/home.php';
 }
+
+// https://github.com/derhofbauer/sae-wdd918
 
 ?>
 
