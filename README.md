@@ -28,3 +28,17 @@ Wer gerne Docker/Docker Compose nutzen möchte, findet ein entsprechendes File i
 ### Alternative Datenbanksysteme
 
 + PostgreSQL (bspw. Volltextsuche): https://www.postgresql.org/
+
+### Snippets
+
+```php
+
+/**
+ * $link holds the DB connection object created by mysqli_connect()
+ */
+$result = mysqli_query($link, "SELECT ...");
+
+while ($row = mysqli_fetch_assoc($result)) {
+    // do something with the current $row
+}
+```

@@ -3,4 +3,4 @@
 /**
  * Datenbankverbindung
  */
-$link = mysqli_connect("localhost", "root", "root", "blog");
+$link = mysqli_connect("mariadb", "root", "password", "blog");

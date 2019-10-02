@@ -1,4 +1,12 @@
+# Das hier ist eine .htaccess Datei. Überlicherweise haben sie keinen Namen, sondern nur die Dateiendung .htaccess.
+# Diese Dateien dienen dazu Apache Konfigurationen für eine Verzeichnis und seine Unterverzeichnisse zu verändern. Sie
+# werden verwendet um Error Reporting, URL Rewriting, Zugriffsberechtigungen, etc. zu konfigurieren, wenn es nicht über
+# die Konfiguration der Virtual Hosts durchgeführt werden kann.
+
 php_flag display_startup_errors on
 php_flag display_errors on
 php_flag html_errors on
-php_flag  log_errors on
+php_flag log_errors on
+
+# Die vordefinierte Konstante E_ALL entspricht dem Integer Wert 32767 (s. https://www.php.net/manual/de/errorfunc.constants.php)
+php_flag error_reporting 32767
