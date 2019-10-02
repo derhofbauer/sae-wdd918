@@ -11,6 +11,6 @@
         <span class="post__created"><?php echo $crdate; ?></span>
     </div>
     <div class="post__content">
-        <?php echo $content; ?>
+        <?php echo substr($content, 0, 200) . '...'; ?>
     </div>
 </article>

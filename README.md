@@ -43,6 +43,17 @@ while ($row = mysqli_fetch_assoc($result)) {
 }
 ```
 
+```php
+/**
+ * Die extract Funktion macht im Hintergrund folgendes:
+ *
+ * $id = $row['id'];
+ * $title = $row['title'];
+ * usw.
+ */
+extract($row);
+```
+
 ### Misc
 
 + some directories in this repository contain files named `.gitkeep`. Git does not check in empty folders, so people use to create `.gitkeep` files in order to make Git check-in "empty" folders (they are not actually empty anymore, when they hold those files, though).
