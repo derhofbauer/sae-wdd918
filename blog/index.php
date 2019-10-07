@@ -23,6 +23,9 @@ if (isset($_GET['page'])) {
         case 'post':
             require_once 'views/templates/post.detail.php';
             break; // break ist sehr wichtig, weil sonst der nächste Case aufgerufen wird
+        case 'category':
+            require_once 'views/templates/category.php';
+            break;
         case 'home':
             // hier verwenden wir kein break, damit das selbe passiert wie im "default" case
         default:
