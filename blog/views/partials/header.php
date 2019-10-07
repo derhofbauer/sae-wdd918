@@ -30,6 +30,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="index.php?page=categories">Kategorien</a>
                 </li>
+            </ul>
+
+            <a href="index.php?page=login">Login</a>
         </div>
     </nav>
 </header>

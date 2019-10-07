@@ -29,6 +29,9 @@ if (isset($_GET['page'])) {
         case 'categories':
             require_once 'views/templates/categories.php';
             break;
+        case 'login':
+            require_once 'views/templates/admin/login.php';
+            break;
         case 'home':
             // hier verwenden wir kein break, damit das selbe passiert wie im "default" case
         default:
