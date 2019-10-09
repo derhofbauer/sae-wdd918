@@ -3,7 +3,10 @@
 ini_set('display_errors', 'On');
 error_reporting('E_ALL');
 
+ob_start();
+
 require_once './bootstrap/dbconnect.php';
+require_once './bootstrap/session.php';
 
 /**
  * Routing
@@ -44,3 +47,5 @@ if (isset($_GET['page'])) {
 
 
 require_once 'views/partials/footer.php';
+
+ob_end_flush();
