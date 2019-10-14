@@ -173,6 +173,8 @@ $RECYCLE.BIN/
 *.lnk
 
 # End of https://www.gitignore.io/api/sass,linux,macos,windows,composer,jetbrains+all
+
 /_uploads/*
 /mvc/config.php
 /mvc/Assets/tmp/*
+/blog/bootstrap/dbconnect.php
