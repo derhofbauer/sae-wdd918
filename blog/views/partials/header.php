@@ -32,7 +32,14 @@
                 </li>
             </ul>
 
-            <a href="index.php?page=login">Login</a>
+            <?php if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true): ?>
+                <a href="index.php?page=login">Login</a>
+            <?php else: ?>
+                <span>
+                    <?php echo $_SESSION['email']; ?>,
+                </span>
+                <a href="index.php?page=logout">Logout</a>
+            <?php endif; ?>
         </div>
     </nav>
 </header>

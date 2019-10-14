@@ -35,6 +35,9 @@ if (isset($_GET['page'])) {
         case 'login':
             require_once 'views/templates/admin/login.php';
             break;
+        case 'logout':
+            require_once 'views/templates/admin/logout.php';
+            break;
         case 'home':
             // hier verwenden wir kein break, damit das selbe passiert wie im "default" case
         default:
