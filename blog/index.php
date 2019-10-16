@@ -3,6 +3,9 @@
 ini_set('display_errors', 'On');
 error_reporting('E_ALL');
 
+/**
+ * Output Buffering einschalten, damit wir zu jedem Zeitpunkt die header()-Funktion verwenden können.
+ */
 ob_start();
 
 require_once './bootstrap/dbconnect.php';
@@ -54,4 +57,7 @@ if (isset($_GET['page'])) {
 
 require_once 'views/partials/footer.php';
 
+/**
+ * Buffer an den Browser schicken
+ */
 ob_end_flush();

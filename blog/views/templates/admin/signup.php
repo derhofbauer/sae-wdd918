@@ -13,9 +13,9 @@
 // 9) Daten in DB speichern
 // 10) Redirect auf Login
 
-if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
-    if (isset($_POST['email'], $_POST['password'], $_POST['password2'])) {
-        if (empty($_POST['email']) || empty($_POST['password']) || empty($_POST['password2'])) {
+if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) { // ist der User bereits eingeloggt?
+    if (isset($_POST['email'], $_POST['password'], $_POST['password2'])) { // wurde das Formular abgeschickt oder nur die Seite aufgerufen?
+        if (empty($_POST['email']) || empty($_POST['password']) || empty($_POST['password2'])) { // wurden Daten in die Felder eingegeben?
             $error = "Bitte füllen Sie alle Felder aus!";
         } else {
             $email = trim($_POST['email']);
@@ -24,7 +24,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
 
             /**
              * Diese Regular Expression ist alles andere als perfekt, sie deckt nicht alle Möglichkeiten ab. Eine
-             * "korrekte" Expression für Emails ist wesentlich länger und komplexer.
+             * "korrekte" Expression für Emails ist wesentlich länger und komplexer (s. https://www.regular-expressions.info/email.html).
              */
             $regex_email = "/^[a-zA-Z0-9_]+\.?\w+@\w+\.[a-zA-Z]{2,10}$/";
             if (preg_match($regex_email, $email) !== 1) {
