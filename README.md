@@ -17,6 +17,8 @@ Wer gerne Docker/Docker Compose nutzen möchte, findet ein entsprechendes File i
 + MySQL Docs: https://dev.mysql.com/doc/
 + GIT Flow: https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow
 + https://learngitbranching.js.org/
++ Regular Expressions: https://regex101.com/
++ https://regexcrossword.com
 
 ### Cheatsheets
 
