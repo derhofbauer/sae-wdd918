@@ -44,6 +44,9 @@ if (isset($_GET['page'])) {
         case 'signup':
             require_once 'views/templates/admin/signup.php';
             break;
+        case 'post-edit':
+            require_once 'views/templates/admin/post.edit.php';
+            break;
         case 'home':
             // hier verwenden wir kein break, damit das selbe passiert wie im "default" case
         default:
