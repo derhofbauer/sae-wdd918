@@ -7,7 +7,7 @@ class HomeController extends BaseController
 
     public function index ()
     {
-        return "HomeController Test";
+        echo "HomeController Test";
     }
 
 }

@@ -11,5 +11,6 @@
  */
 
 return [
-    "/" => "HomeController.index"
+    "/" => "HomeController.index",
+    "/products/:id" => "ProductController.show",
 ];
