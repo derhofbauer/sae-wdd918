@@ -7,7 +7,11 @@ class HomeController extends BaseController
 
     public function index ()
     {
-        echo "HomeController Test";
+        $params = [
+            "welcome_message" => "HomeController Test"
+        ];
+        $this->view->addJs('assets/js/fancyAnimation.js');
+        $this->view->render('home', $params);
     }
 
 }
