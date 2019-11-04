@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Libs;
+namespace Core\Libs;
 
 class Validator
 {
@@ -16,7 +16,7 @@ class Validator
     private $error_msg = [];
     private $name;
 
-    public function val($data = "", $name = '', $required = false, $type = "text", $min = null, $max = null)
+    public function validate($data = "", $name = '', $required = false, $type = "text", $min = null, $max = null)
     {
         $this->name = $name;
 
@@ -43,7 +43,7 @@ class Validator
         }
     }
 
-    public function check($data1, $data2)
+    public function compare($data1, $data2)
     {
         if (is_array($data1) && is_array($data2)) {
             if ($data1[0] !== $data2[0]) {
