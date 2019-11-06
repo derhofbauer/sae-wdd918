@@ -40,7 +40,7 @@
                 <span>
                     <?php echo $_SESSION['email']; ?>,
                 </span>
-                <a href="index.php?page=logout">Logout</a>
+                <a href="logout">Logout</a>
             <?php endif; ?>
         </div>
     </nav>

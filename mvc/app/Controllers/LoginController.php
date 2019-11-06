@@ -35,10 +35,11 @@ class LoginController extends BaseController
 
         $errors = [];
 
+        // Prüfen, ob der CSRF Token in der Session übereinstimmt
         if (check_csrf($csrf_token) === false) {
             $errors[] = "Um Himmels Willen! Willst du uns hacken?!";
         } else {
-            // Validierung
+            // Validierung der eingegebenen Daten
             $validator = new Validator();
             $validator->validate($email, "Email", true, 'email');
             $validator->validate($password, 'Password', true, 'password', 8);
@@ -56,8 +57,7 @@ class LoginController extends BaseController
                     $user->login(); // s. User Model
 
                     // Redirect
-                    $appConfig = require __DIR__ . '/../../config/app.php';
-                    $baseUrl = $appConfig['baseUrl'];
+                    $baseUrl = config('app.baseUrl');
                     header("Location: $baseUrl");
                     exit;
                 } else {
@@ -67,7 +67,7 @@ class LoginController extends BaseController
             }
         }
 
-        if (!empty($errors)) {
+        if (!empty($errors)) { // wenn es Fehler gibt
             $params = [
                 'errors' => $errors
             ];

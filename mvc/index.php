@@ -4,11 +4,10 @@
 //error_reporting('E_ALL');
 
 // phpinfo();
-
 use Core\Libs\Session;
 use Core\Bootstrap;
 
-require_once __DIR__ . '/core/helpers.php';
+require_once __DIR__ . '/core/helpers.php'; // <-- im globalen Scope und somit überall verfügbar
 
 /**
  * Autoloader
@@ -20,7 +19,6 @@ spl_autoload_register(function ($class) {
 
     require_once __DIR__ . "/${class}.php";
 });
-
 
 Session::init();
 

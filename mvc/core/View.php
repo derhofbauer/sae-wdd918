@@ -13,7 +13,7 @@ class View
 
     public function __construct ()
     {
-        $appConfig = require_once __DIR__ . '/../config/app.php';
+        $appConfig = require __DIR__ . '/../config/app.php';
 
         $this->baseUrl = $appConfig['baseUrl'];
     }
