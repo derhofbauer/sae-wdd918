@@ -66,8 +66,19 @@ class User
         return false;
     }
 
-    public function logout () {
+    public static function logout () {
+        if (Session::get('logged_in') === true) {
 
+            Session::add('logged_in', false);
+            Session::delete('email');
+
+            return true;
+        }
+        return false;
+    }
+
+    public function save() {
+        // Speichert aktuelle Werte der Properties in die Datenbank
     }
 
 }

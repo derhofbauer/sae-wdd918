@@ -35,7 +35,7 @@ class LoginController extends BaseController
 
         $errors = [];
 
-        // Prüfen, ob der CSRF Token in der Session übereinstimmt
+        // Prüfen, ob der CSRF Token in der Session übereinstimmt --> s. helpers.php
         if (check_csrf($csrf_token) === false) {
             $errors[] = "Um Himmels Willen! Willst du uns hacken?!";
         } else {
@@ -73,6 +73,14 @@ class LoginController extends BaseController
             ];
             $this->view->render('login-form', $params);
         }
+    }
+
+    public function doLogout () {
+        User::logout();
+
+        // Redirect
+        $baseUrl = config('app.baseUrl');
+        header("Location: {$baseUrl}login");
     }
 
 }

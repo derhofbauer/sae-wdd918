@@ -1,16 +1,18 @@
 <?php
 
-//ini_set('display_errors', 'On');
-//error_reporting('E_ALL');
-
-// phpinfo();
 use Core\Libs\Session;
 use Core\Bootstrap;
 
-require_once __DIR__ . '/core/helpers.php'; // <-- im globalen Scope und somit überall verfügbar
+/**
+ * Einbinden der Helper Funktionen in den globalen
+ * Scope, damit sie überall verfügbar sind
+ */
+require_once __DIR__ . '/core/helpers.php';
 
 /**
  * Autoloader
+ *
+ * Die anonyme Funktion wird immer aufgerufen, wenn wir eine Klasse aufrufen
  */
 spl_autoload_register(function ($class) {
     $class = str_replace("Core", "core", $class);
@@ -20,6 +22,12 @@ spl_autoload_register(function ($class) {
     require_once __DIR__ . "/${class}.php";
 });
 
+/**
+ * Session Initialisieren
+ */
 Session::init();
 
+/**
+ * Gesamtes Framework starten (Routing, Template Loading, etc.)
+ */
 $app = new Bootstrap();
