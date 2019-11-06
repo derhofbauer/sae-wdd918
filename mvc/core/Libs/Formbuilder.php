@@ -2,8 +2,6 @@
 
 namespace Core\Libs;
 
-require_once __DIR__ . '/../helpers.php';
-
 class Formbuilder
 {
     private $markup = [];

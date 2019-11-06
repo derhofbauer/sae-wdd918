@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\User;
 use Core\Libs\Formbuilder;
 use Core\Libs\Validator;
 
@@ -15,8 +16,8 @@ class LoginController extends BaseController
 
         $form = new Formbuilder("login", $appConfig['baseUrl'] . 'do-login'); // http://localhost:8080/mvc/do-login
         $form
-            ->addInput('email', 'Email', 'Email', ['placeholder' => "Email address", 'required' => 'true', 'autofocus' => 'true'])
-            ->addInput('password', 'Password', 'Password', ['placeholder' => 'Password', 'required' => 'true'])
+            ->addInput('email', 'email', 'Email', ['placeholder' => "Email address", 'required' => 'true', 'autofocus' => 'true'])
+            ->addInput('password', 'password', 'Password', ['placeholder' => 'Password', 'required' => 'true'])
             ->addButton('submit', 'Sign in');
 
         $params = [
@@ -26,7 +27,8 @@ class LoginController extends BaseController
 
     }
 
-    public function doLogin () {
+    public function doLogin ()
+    {
         $email = $_POST['email'];
         $password = $_POST['password'];
         $csrf_token = $_POST['csrf'];
@@ -47,8 +49,21 @@ class LoginController extends BaseController
                 $errors = $validationErrors;
             } else {
                 // Existiert ein User mit der Email?
-                // wenn ja: Passwort prüfen (Vorsicht: Hash!)
-                // wenn nein: Fehler ausgeben
+                $user = User::findByEmail($email);
+                // existiert der User und ist das Passwort richtig?
+                if ($user !== false && $user->checkPassword($password) === true) {
+                    // Session setzen
+                    $user->login(); // s. User Model
+
+                    // Redirect
+                    $appConfig = require __DIR__ . '/../../config/app.php';
+                    $baseUrl = $appConfig['baseUrl'];
+                    header("Location: $baseUrl");
+                    exit;
+                } else {
+                    // es gibt keinen user mit der $email --> Fehler ausgeben
+                    $errors[] = 'User existiert nicht oder Passwort ist falsch :(';
+                }
             }
         }
 

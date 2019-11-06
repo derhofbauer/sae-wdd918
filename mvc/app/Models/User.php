@@ -3,7 +3,8 @@
 namespace App\Models;
 
 use Core\Libs\DB;
-use mysql_xdevapi\Exception;
+use Core\Libs\Session;
+use \Exception;
 
 class User
 {
@@ -22,9 +23,9 @@ class User
         $stmt->bind_param('s', $email);
 
         $stmt->execute();
+        $result = $stmt->get_result();
 
-        if ($stmt->num_rows === 1) {
-            $result = $stmt->get_result();
+        if ($result->num_rows === 1) {
             $result = $result->fetch_all(MYSQLI_ASSOC)[0];
 
             $user = new self();
@@ -35,11 +36,38 @@ class User
             $user->is_admin = $result['is_admin'];
 
             return $user;
-        } elseif ($stmt->num_rows > 1) {
+        } elseif ($result->num_rows > 1) {
             throw new Exception('Database broken!');
         } else {
             return false;
         }
+    }
+
+    public function checkPassword ($input)
+    {
+        /*
+         * wir prüfen das Passwort nur, wenn wir überhaupt schon
+         * eines im aktuellen Objekt haben, weil die Prüfung
+         * relativ Resourcen-aufwändig ist
+         */
+        if (!empty($this->password)) {
+            // Passwort prüfen und Rückgabewert returnen
+            return password_verify($input, $this->password);
+        }
+        return false;
+    }
+
+    public function login() {
+        if (!empty($this->password)) {
+            Session::add('logged_in', true);
+            Session::add('email', $this->email);
+            return true;
+        }
+        return false;
+    }
+
+    public function logout () {
+
     }
 
 }

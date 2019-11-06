@@ -8,6 +8,8 @@
 use Core\Libs\Session;
 use Core\Bootstrap;
 
+require_once __DIR__ . '/core/helpers.php';
+
 /**
  * Autoloader
  */
