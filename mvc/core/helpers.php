@@ -48,7 +48,7 @@ function config ($fileAndKey) {
      */
     $config = [
         'db' => require __DIR__ . '/../config/db.php',
-        'app' => require __DIR__ . '/../config/app.php',
+        'app' => require __DIR__ . '/../config/app.example.php',
     ];
 
     // $fileAndKey: "app.baseUrl"
