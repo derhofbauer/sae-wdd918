@@ -2,6 +2,10 @@
 
 namespace Core\Libs;
 
+/**
+ * Der Formbuilder wird von uns als externe Abhängigkeit betrachtet, daher kommentiere ich ihn nicht. Die Verwendung
+ * kann in den Controllern beispielhaft nachgelesen werden.
+ */
 class Formbuilder
 {
     private $markup = [];
