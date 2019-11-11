@@ -10,11 +10,17 @@ class Session
         session_start();
     }
 
+    /**
+     * Wert in die Session hinzufügen oder aktualisieren.
+     */
     public static function add ($key, $value)
     {
         $_SESSION[$key] = $value;
     }
 
+    /**
+     * Wert aus der Session auslesen.
+     */
     public static function get ($key)
     {
         if (isset($_SESSION[$key])) {
@@ -23,6 +29,9 @@ class Session
         return null;
     }
 
+    /**
+     * Wert aus der Session löschen, sofern er gesetzt ist.
+     */
     public static function delete ($key)
     {
         if (isset($_SESSION[$key])) {
@@ -30,6 +39,9 @@ class Session
         }
     }
 
+    /**
+     * gesamte Session löschen
+     */
     public static function kill ()
     {
         session_destroy();

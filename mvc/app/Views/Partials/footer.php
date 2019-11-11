@@ -1,6 +1,11 @@
 <footer>
 
 </footer>
-<?php echo $this->getJsMarkup(); ?>
+<?php
+/**
+ * JS Files einbinden.
+ */
+echo $this->getJsMarkup();
+?>
 </body>
 </html>

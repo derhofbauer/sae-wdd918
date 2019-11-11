@@ -6,9 +6,21 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Fancy Blog</title>
 
+    <?php
+    /**
+     * Der `<base>`-Tag gibt an von welcher Adresse aus relative URLs berechnet werden sollen.
+     *
+     * s. https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
+     */
+    ?>
     <base href="<?php echo $this->baseUrl; ?>">
 
-    <?php echo $this->getCssMarkup(); ?>
+    <?php
+    /**
+     * CSS Files einbinden.
+     */
+    echo $this->getCssMarkup();
+    ?>
 </head>
 <body>
 <header>

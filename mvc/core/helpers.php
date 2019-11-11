@@ -4,6 +4,7 @@ use Core\Libs\Session;
 
 /**
  * Setzt einen CSRF Token
+ *
  * s. https://de.wikipedia.org/wiki/Cross-Site-Request-Forgery
  */
 function set_csrf ()
@@ -42,9 +43,12 @@ function check_csrf ($csrf)
  * - config('db.host')
  */
 function config ($fileAndKey) {
+    /**
+     * Laden der Config-Files
+     */
     $config = [
         'db' => require __DIR__ . '/../config/db.php',
-        'app' => require __DIR__ . '/../config/app.php',
+        'app' => require __DIR__ . '/../config/app.example.php',
     ];
 
     // $fileAndKey: "app.baseUrl"

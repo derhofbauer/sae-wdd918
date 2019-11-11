@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * use Statements werden verwendet um bei der Verwendung von Klassen, wie hier auf den Zeilen 33 und 38 nicht den
+ * gesamten Namespace angeben zu müssen.
+ */
+
 use Core\Libs\Session;
 use Core\Bootstrap;
 

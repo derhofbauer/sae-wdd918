@@ -179,3 +179,4 @@ $RECYCLE.BIN/
 /mvc/Assets/tmp/*
 /blog/bootstrap/dbconnect.php
 /mvc/config/db.php
+/mvc/config/app.php

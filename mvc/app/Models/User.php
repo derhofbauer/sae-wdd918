@@ -9,6 +9,11 @@ use \Exception;
 class User
 {
 
+    /**
+     * Für jede Spalte der User in der Datenbank, sollte hier eine Eigenschaft angelegt werden.
+     *
+     * Teilweise macht es Sinn Standardwerte zu definieren.
+     */
     public $id;
     public $email;
     public $username = null;
@@ -17,8 +22,16 @@ class User
 
     public static function findByEmail ($email)
     {
+        /**
+         * neues DB Objekt instanzieren und damit Datenbankverbindung herstellen
+         */
         $link = new DB();
 
+        /**
+         * MySQL Statement vorbereiten und ausführen
+         *
+         * s.https://www.php.net/manual/en/mysqli.quickstart.prepared-statements.php
+         */
         $stmt = $link->prepare("SELECT * FROM users WHERE email = ?");
         $stmt->bind_param('s', $email);
 
@@ -26,6 +39,10 @@ class User
         $result = $stmt->get_result();
 
         if ($result->num_rows === 1) {
+            /**
+             * Existiert genau 1 Datensatz mit der Email-Adresse, so laden wir die Daten, befüllen ein neues User
+             * Objekt damit und geben es zurück.
+             */
             $result = $result->fetch_all(MYSQLI_ASSOC)[0];
 
             $user = new self();
@@ -37,8 +54,18 @@ class User
 
             return $user;
         } elseif ($result->num_rows > 1) {
+            /**
+             * Existiert mehr als 1 Datensatz mit der Email-Adresse, ist die Datenbank kaputt und wir werfen eine
+             * Exception.
+             *
+             * Exceptions sollten sehr sparsam verwendet werden, da sie dazu verleiten können unsauberen Code
+             * zu schreiben.
+             */
             throw new Exception('Database broken!');
         } else {
+            /**
+             * Wird gar kein Datensatz gefunden, können wir auch keine Daten setzen.
+             */
             return false;
         }
     }
@@ -74,12 +101,13 @@ class User
     public function checkPassword ($input)
     {
         /*
-         * wir prüfen das Passwort nur, wenn wir überhaupt schon
-         * eines im aktuellen Objekt haben, weil die Prüfung
+         * wir prüfen das Passwort nur, wenn wir überhaupt schon eines im aktuellen Objekt haben, weil die Prüfung
          * relativ Resourcen-aufwändig ist
          */
         if (!empty($this->password)) {
-            // Passwort prüfen und Rückgabewert returnen
+            /**
+             * Passwort prüfen und Rückgabewert zurückgeben
+             */
             return password_verify($input, $this->password);
         }
         return false;
@@ -87,6 +115,9 @@ class User
 
     public function login ()
     {
+        /**
+         * Ist das Passwort des aktuellen Objekts nicht leer, so setzen wir die benötigten Sessions.
+         */
         if (!empty($this->password)) {
             Session::add('logged_in', true);
             Session::add('email', $this->email);
@@ -106,6 +137,12 @@ class User
 
     public static function logout ()
     {
+        /**
+         * Ist ein User eingeloggt, loggen wir ihn hier aus.
+         *
+         * Wir könnten auch Session::kill() verwenden, aber möglicherweise sind auch andere Informationen in der
+         * Session gespeichert, die dann auch verloren gehen würden (bspw. Warenkorb).
+         */
         if (Session::get('logged_in') === true) {
 
             Session::add('logged_in', false);
