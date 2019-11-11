@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Models\User;
 use Core\Libs\Formbuilder;
+use Core\Libs\Session;
 use Core\Libs\Validator;
 
 class SignupController extends BaseController
@@ -20,8 +21,10 @@ class SignupController extends BaseController
             ->addButton('submit', 'Sign up');
 
         $params = [
-            'form' => $form->output()
+            'form' => $form->output(),
+            'errors' => Session::get('errors', [])
         ];
+        Session::delete('errors');
         $this->view->render('signup-form', $params);
     }
 
@@ -95,8 +98,11 @@ class SignupController extends BaseController
                     $params = [
                         'errors' => $errors
                     ];
-                    var_dump($errors);
-                    $this->view->render('signup-form', $params);
+                    Session::add('errors', $errors);
+                    // Redirect
+                    $baseUrl = config('app.baseUrl');
+                    header("Location: ${baseUrl}signup");
+                    exit;
                 }
             }
         }

@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Models\User;
 use Core\Libs\Formbuilder;
+use Core\Libs\Session;
 use Core\Libs\Validator;
 
 class LoginController extends BaseController
@@ -35,8 +36,10 @@ class LoginController extends BaseController
          * $form->output() generiert das fertige HTML. Hier übergeben wir es in die Parameter für das Template
          */
         $params = [
-            'form' => $form->output()
+            'form' => $form->output(),
+            'errors' => Session::get('errors', [])
         ];
+        Session::delete('errors');
 
         /**
          * Template Loading starten
@@ -134,10 +137,11 @@ class LoginController extends BaseController
          * wenn es Fehler gibt, laden wir das login-form Template erneut und übergeben die Fehler an dieses Template
          */
         if (!empty($errors)) {
-            $params = [
-                'errors' => $errors
-            ];
-            $this->view->render('login-form', $params);
+            Session::add('errors', $errors);
+            // Redirect
+            $baseUrl = config('app.baseUrl');
+            header("Location: ${baseUrl}login");
+            exit;
         }
     }
 
