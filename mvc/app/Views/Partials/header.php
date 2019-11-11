@@ -35,7 +35,7 @@
             </ul>
 
             <?php if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true): ?>
-                <a href="login">Login</a>
+                <a href="login">Login</a> or <a href="signup">Signup</a>
             <?php else: ?>
                 <span>
                     <?php echo $_SESSION['email']; ?>,

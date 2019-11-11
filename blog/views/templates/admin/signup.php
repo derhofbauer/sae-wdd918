@@ -8,7 +8,7 @@
 // 4) Gültige Email Adresse? --> Ja: weiter, Nein: Fehler ausgeben
 // 5) Email Adresse schon in DB vorhanden? --> Ja: Fehler ausgeben, Nein: weiter
 // 6) Passwörter ident? --> Ja: weiter, nein: Fehler ausgeben
-// 7) Mindestanforderugen prüfen (min. 8 Zeichen, mind. 1 Sonderzeichen, mind. 1 Großbuchstabe, mind. 1 Kleinbuchstabe, mind. 1 Ziffer, kein Whitespace) --> Gültig: weiter, Ungültig: Fehler ausgeben
+// 7) Mindestanforderungen prüfen (min. 8 Zeichen, mind. 1 Sonderzeichen, mind. 1 Großbuchstabe, mind. 1 Kleinbuchstabe, mind. 1 Ziffer, kein Whitespace) --> Gültig: weiter, Ungültig: Fehler ausgeben
 // 8) Passwörter hashen
 // 9) Daten in DB speichern
 // 10) Redirect auf Login

@@ -11,10 +11,7 @@ class LoginController extends BaseController
 
     public function showForm ()
     {
-
-        $appConfig = require_once __DIR__ . '/../../config/app.php';
-
-        $form = new Formbuilder("login", $appConfig['baseUrl'] . 'do-login'); // http://localhost:8080/mvc/do-login
+        $form = new Formbuilder("login", config('app.baseUrl') . 'do-login'); // http://localhost:8080/mvc/do-login
         $form
             ->addInput('email', 'email', 'Email', ['placeholder' => "Email address", 'required' => 'true', 'autofocus' => 'true'])
             ->addInput('password', 'password', 'Password', ['placeholder' => 'Password', 'required' => 'true'])
