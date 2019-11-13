@@ -55,6 +55,11 @@ class ProductController extends BaseController
         // $images = ['path/to/image.jpg' => '<img ="....'];
         $images =  [];
         foreach ($product->images as $image) {
+            /**
+             * Der Formbuilder erwartet einen Array im Format: HTML-value => Label.
+             * Wir generieren hier einen IMG-Tag als Label. Das ist nicht ganz sauber so, aber für unsere
+             * Zwecke duerfte es reichen.
+             */
             $images[$image] = "<img src=\"storage/$image\" width='50'>";
         }
         var_dump($images);
