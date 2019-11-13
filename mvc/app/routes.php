@@ -13,6 +13,7 @@
 return [
     "/" => "HomeController.index",
     "/products/:id" => "ProductController.show",
+    "/products/:id/edit" => "ProductController.edit",
 
     "/login" => "LoginController.showForm",
     "/do-login" => "LoginController.doLogin",

@@ -122,6 +122,7 @@ class User
             Session::add('logged_in', true);
             Session::add('email', $this->email);
             Session::add('user_id', $this->id);
+            Session::add('is_admin', $this->is_admin);
             return true;
         }
         return false;
@@ -148,7 +149,7 @@ class User
             Session::add('logged_in', false);
             Session::delete('email');
             Session::delete('user_id');
-
+            Session::delete('is_admin');
             return true;
         }
         return false;
