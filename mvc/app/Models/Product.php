@@ -65,4 +65,15 @@ class Product
             return false;
         }
     }
+
+    public function save ()
+    {
+        $link = new DB();
+
+        $stmt = $link->prepare("UPDATE products SET name = ?, description = ?, price = ?, stock = ? WHERE id = ?");
+        $stmt->bind_param('ssdii', $this->name, $this->description, $this->price, $this->stock, $this->id);
+        $stmt->execute();
+
+        return $this;
+    }
 }

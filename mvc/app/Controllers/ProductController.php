@@ -6,6 +6,7 @@ use App\Models\Product;
 use App\Models\User;
 use Core\Libs\Formbuilder;
 use Core\Libs\Session;
+use Core\Libs\Validator;
 
 /**
  * Product
@@ -53,16 +54,15 @@ class ProductController extends BaseController
         $form->addInput('file', 'new_image', 'Add some fancy image');
 
         // $images = ['path/to/image.jpg' => '<img ="....'];
-        $images =  [];
+        $images = [];
         foreach ($product->images as $image) {
             /**
              * Der Formbuilder erwartet einen Array im Format: HTML-value => Label.
              * Wir generieren hier einen IMG-Tag als Label. Das ist nicht ganz sauber so, aber für unsere
              * Zwecke duerfte es reichen.
              */
-            $images[$image] = "<img src=\"storage/$image\" width='50'>";
+            $images["delete_image[$image]"] = "<img src=\"storage/$image\" width='50'>";
         }
-        var_dump($images);
         $form->addCheckboxGroup($images);
 
         $form->addButton('submit', 'Save', ['type' => 'submit']);
@@ -74,4 +74,48 @@ class ProductController extends BaseController
         $this->view->render('product-edit', $params);
     }
 
+    public function update ($id)
+    {
+        if (!User::isLoggedin() || Session::get('is_admin') != true) {
+            die("Du bist kein Admin :(");
+        }
+
+        $product = Product::find($id);
+
+        $errors = [];
+        if (check_csrf($_POST['csrf']) === false) {
+            $errors[] = "Um Himmels Willen! Willst du uns hacken?!";
+        } else {
+            $validator = new Validator();
+
+            $validator->validate($_POST['name'], 'Name', true, 'textnum', 5, 255);
+            $validator->validate($_POST['description'], 'Description', false, 'textnum');
+            $validator->validate($_POST['price'], 'Price', true, 'textnum');
+            $validator->validate($_POST['stock'], 'Stock', true, 'num');
+
+            $validationErrors = $validator->getErrors();
+
+            if ($validationErrors !== false) {
+                $errors = $validationErrors;
+                // Fehler müssten noch irgendwo ausgegeben werden; aus Zeitgründen verzichten wir darauf (s. Signup)
+            } else {
+                $product->name = $_POST['name'];
+                $product->description = $_POST['description'];
+                $product->stock = (int)$_POST['stock'];
+                $product->price = (float)$_POST['price'];
+
+                $product->save();
+
+                $baseUrl = config('app.baseUrl');
+                header("Location: ${baseUrl}products/$id");
+                exit;
+            }
+        }
+    }
+
 }
+
+// Route anlegen
+// (Controller &) Action anlegen
+// Daten aus $_POST auslesen, validieren und in ein Produkt speichern
+//  Produkt Objekt in Datenbank speichern
