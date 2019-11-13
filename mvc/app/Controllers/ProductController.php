@@ -2,6 +2,8 @@
 
 namespace App\Controllers;
 
+use App\Models\Product;
+
 /**
  * Product
  * + id
@@ -23,7 +25,14 @@ class ProductController extends BaseController
 
     public function show ($id)
     {
-        echo "ProductController Test: $id";
+        // echo "ProductController Test: $id";
+        $product = Product::find($id);
+
+        $params = [
+            'product' => $product
+        ];
+
+        $this->view->render('product', $params);
     }
 
 }

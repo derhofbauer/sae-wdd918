@@ -4,6 +4,8 @@
 
 <ul>
     <?php foreach ($products as $product): ?>
-        <li><?php echo $product->name; ?></li>
+        <li>
+            <a href="products/<?php echo $product->id; ?>"><?php echo $product->name; ?></a>
+        </li>
     <?php endforeach; ?>
 </ul>
