@@ -69,7 +69,11 @@ class Product
     public function addImages (array $images)
     {
         foreach ($images as $image) {
-            $this->images[] = $image;
+            /**
+             * ltrim entfernt alle Slashes vom Beginn des Strings, damit alle Pfade das selbe Format haben und nicht mit
+             * einem Slash beginnen.
+             */
+            $this->images[] = ltrim($image, '/');
         }
     }
 
