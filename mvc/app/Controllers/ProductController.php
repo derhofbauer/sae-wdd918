@@ -51,7 +51,7 @@ class ProductController extends BaseController
         $form->addTextarea('description', 'Description', $product->description);
         $form->addInput('number', 'price', 'Price', ['value' => $product->price, 'step' => '.01']);
         $form->addInput('number', 'stock', 'Stock', ['value' => $product->stock]);
-        $form->addInput('file', 'new_image', 'Add some fancy image');
+        $form->addInput('file', 'new_image[]', 'Add some fancy image', ['multiple' => 'multiple']);
 
         // $images = ['path/to/image.jpg' => '<img ="....'];
         $images = [];
@@ -93,6 +93,28 @@ class ProductController extends BaseController
             $validator->validate($_POST['price'], 'Price', true, 'textnum');
             $validator->validate($_POST['stock'], 'Stock', true, 'num');
 
+            $uploadedFiles = [];
+
+            $new_image = $_FILES['new_image'];
+            $storage_path = config('app.storagePath'); // /var/www/html/mvc/storage
+            foreach ($new_image['error'] as $index => $error) {
+                if ($error == UPLOAD_ERR_OK) {
+                    $mimetype = $new_image['type'][$index];
+                    if (strpos($mimetype, 'image/') !== false) {
+                        $tmp_name = $new_image['tmp_name'][$index];
+                        $file_extension = explode('/', $mimetype)[1]; // kann bei Word Dokumenten etc. Probleme machen, in unserem Fall, also bei Bildern, sollte das so passen. Andernfalls muss die Dateiendung aus dem originalen Dateinamen gedröselt werden.
+
+                        $new_filename = "img_" . time() . "_$index.$file_extension";
+                        $final_file_path = "$storage_path/uploads/$new_filename";
+                        $uploadedFiles[] = "/uploads/$new_filename";
+                        move_uploaded_file($tmp_name, $final_file_path);
+                    } else {
+                        $original_file_name = $new_filename['name'][$index];
+                        $errors[] = "Dateityp von $original_file_name nicht unterstützt. Bitte laden Sie ein Bild hoch";
+                    }
+                }
+            }
+
             $validationErrors = $validator->getErrors();
 
             if ($validationErrors !== false) {
@@ -103,6 +125,7 @@ class ProductController extends BaseController
                 $product->description = $_POST['description'];
                 $product->stock = (int)$_POST['stock'];
                 $product->price = (float)$_POST['price'];
+                $product->addImages($uploadedFiles);
 
                 $product->save();
 
@@ -112,10 +135,4 @@ class ProductController extends BaseController
             }
         }
     }
-
 }
-
-// Route anlegen
-// (Controller &) Action anlegen
-// Daten aus $_POST auslesen, validieren und in ein Produkt speichern
-//  Produkt Objekt in Datenbank speichern

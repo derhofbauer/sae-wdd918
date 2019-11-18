@@ -180,3 +180,4 @@ $RECYCLE.BIN/
 /blog/bootstrap/dbconnect.php
 /mvc/config/db.php
 /mvc/config/app.php
+/mvc/storage/uploads/*

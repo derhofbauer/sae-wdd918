@@ -66,12 +66,21 @@ class Product
         }
     }
 
+    public function addImages (array $images)
+    {
+        foreach ($images as $image) {
+            $this->images[] = $image;
+        }
+    }
+
     public function save ()
     {
         $link = new DB();
 
-        $stmt = $link->prepare("UPDATE products SET name = ?, description = ?, price = ?, stock = ? WHERE id = ?");
-        $stmt->bind_param('ssdii', $this->name, $this->description, $this->price, $this->stock, $this->id);
+        $images = implode(',', $this->images);
+
+        $stmt = $link->prepare("UPDATE products SET name = ?, description = ?, price = ?, stock = ?, images = ? WHERE id = ?");
+        $stmt->bind_param('ssdisi', $this->name, $this->description, $this->price, $this->stock, $images, $this->id);
         $stmt->execute();
 
         return $this;
