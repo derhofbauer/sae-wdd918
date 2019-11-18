@@ -115,6 +115,9 @@ class ProductController extends BaseController
                 }
             }
 
+            // @todo: Prüfe hier, ob Dateien gelöscht werden sollen
+            // @todo: Lösche die Dateien hier bei Bedarf aus dem Product-Objekt
+
             $validationErrors = $validator->getErrors();
 
             if ($validationErrors !== false) {

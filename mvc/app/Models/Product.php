@@ -85,4 +85,6 @@ class Product
 
         return $this;
     }
+
+    // @todo: Schreibe eine Methode, um ein Bild aus $this->images zu löschen und die Datei aus dem Upload Ordner zu entfernen
 }
