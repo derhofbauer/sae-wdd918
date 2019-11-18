@@ -12,6 +12,7 @@ class Product
     public $price;
     public $images = [];
     public $stock;
+    private $_deleteImages = [];
 
     public static function all ()
     {
@@ -87,8 +88,29 @@ class Product
         $stmt->bind_param('ssdisi', $this->name, $this->description, $this->price, $this->stock, $images, $this->id);
         $stmt->execute();
 
+        $this->deleteImagesFromDisk();
+
         return $this;
     }
 
     // @todo: Schreibe eine Methode, um ein Bild aus $this->images zu löschen und die Datei aus dem Upload Ordner zu entfernen
+    public function removeImage (string $path)
+    {
+        if (in_array($path, $this->images)) {
+            $imageIndex = array_search($path, $this->images);
+            unset($this->images[$imageIndex]);
+
+            $this->_deleteImages[] = $path;
+        }
+    }
+
+    private function deleteImagesFromDisk ()
+    {
+        $storagePath = config('app.storagePath');
+
+        foreach ($this->_deleteImages as $deleteImage) {
+            $filePath = "$storagePath/$deleteImage";
+            unlink($filePath);
+        }
+    }
 }

@@ -116,7 +116,12 @@ class ProductController extends BaseController
             }
 
             // @todo: Prüfe hier, ob Dateien gelöscht werden sollen
-            // @todo: Lösche die Dateien hier bei Bedarf aus dem Product-Objekt
+            if (isset($_POST['delete_image'])) {
+                foreach ($_POST['delete_image'] as $path => $value) {
+                    // @todo: Lösche die Dateien hier bei Bedarf aus dem Product-Objekt
+                    $product->removeImage($path);
+                }
+            }
 
             $validationErrors = $validator->getErrors();
 
