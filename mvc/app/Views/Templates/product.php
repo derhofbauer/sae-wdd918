@@ -17,3 +17,5 @@ if (\App\Models\User::isLoggedin() && \Core\Libs\Session::get('is_admin')):
         <img src="storage/<?php echo $image; ?>" alt="<?php echo $product->name; ?>" width="150">
     <?php endforeach; ?>
 </div>
+
+<a href="cart/add/<?php echo $product->id; ?>/1">Add To Cart</a>

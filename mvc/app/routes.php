@@ -21,5 +21,9 @@ return [
     "/logout" => "LoginController.doLogout",
 
     "/signup" => "SignupController.showForm",
-    "/do-signup" => "SignupController.doSignup"
+    "/do-signup" => "SignupController.doSignup",
+
+    "/cart/add/:productId/:quantity" => "CartController.addProductToCart",
+    "/cart/update/:productId/:quantity" => "CartController.updateProductInCart",
+    "/cart" => "CartController.list"
 ];
