@@ -29,7 +29,9 @@ class Product
             $p->name = $product['name'];
             $p->description = $product['description'];
             $p->price = $product['price'];
-            $p->images = explode(',', $product['images']);
+            if (strlen(trim($result['images'])) > 0) {
+                $p->images = explode(',', $result['images']);
+            }
             $p->stock = $product['stock'];
 
             $products[] = $p;
@@ -56,7 +58,9 @@ class Product
             $product->name = $result['name'];
             $product->description = $result['description'];
             $product->price = $result['price'];
-            $product->images = explode(',', $result['images']);
+            if (strlen(trim($result['images'])) > 0) { // in dem konkreten Fehlerfall, könnte auch !empty(…) verwendet werden
+                $product->images = explode(',', $result['images']);
+            }
             $product->stock = $result['stock'];
 
             return $product;
