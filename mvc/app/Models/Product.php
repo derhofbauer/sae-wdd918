@@ -29,8 +29,8 @@ class Product
             $p->name = $product['name'];
             $p->description = $product['description'];
             $p->price = $product['price'];
-            if (strlen(trim($result['images'])) > 0) {
-                $p->images = explode(',', $result['images']);
+            if (strlen(trim($product['images'])) > 0) {
+                $p->images = explode(',', $product['images']);
             }
             $p->stock = $product['stock'];
 
