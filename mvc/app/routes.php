@@ -27,5 +27,6 @@ return [
     "/cart/update/:productId/:quantity" => "CartController.updateProductInCart",
     "/cart" => "CartController.list",
 
-    "/checkout" => "CheckoutController.overview"
+    "/checkout" => "CheckoutController.overview",
+    "/checkout/address" => "CheckoutController.showDeliveryAddressForm"
 ];
