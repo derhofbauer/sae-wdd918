@@ -5,3 +5,7 @@
         <a href="cart/update/<?php echo $product->id; ?>/<?php echo $product->quantity + 1; ?>">plus 1</a></li>
     <?php endforeach; ?>
 </ul>
+
+<div class="checkout">
+    <a href="checkout">Zur Kassa</a>
+</div>
