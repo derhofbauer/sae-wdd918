@@ -117,4 +117,12 @@ class Product
             unlink($filePath);
         }
     }
+
+    public function getFormattedPrice () {
+        return self::formatPrice($this->price);
+    }
+
+    public static function formatPrice (float $price) {
+        return sprintf("%01.2f ,-",$price);
+    }
 }
