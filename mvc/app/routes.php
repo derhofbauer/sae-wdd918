@@ -30,5 +30,6 @@ return [
     "/checkout" => "CheckoutController.overview",
     "/checkout/address" => "CheckoutController.showDeliveryAddressForm",
     "/checkout/use-address" => "CheckoutController.useExistingAddress",
-    "/checkout/add-address" => "CheckoutController.addNewAddress"
+    "/checkout/add-address" => "CheckoutController.addNewAddress",
+    "/checkout/check" => "CheckoutController.check",
 ];

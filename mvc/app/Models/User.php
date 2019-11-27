@@ -20,6 +20,34 @@ class User
     private $password;
     public $is_admin = false;
 
+    public static function find (int $id)
+    {
+        $link = new DB();
+
+        $stmt = $link->prepare("SELECT * FROM users WHERE id = ?");
+        $stmt->bind_param('i', $id);
+
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if ($result->num_rows === 1) {
+            $result = $result->fetch_all(MYSQLI_ASSOC)[0];
+
+            $user = new self();
+            $user->id = $result['id'];
+            $user->email = $result['email'];
+            $user->username = $result['username'];
+            $user->is_admin = $result['is_admin'];
+            $user->password = $result['password'];
+
+            return $user;
+        } elseif ($result->num_rows > 1) {
+            throw new Exception('Database broken!');
+        } else {
+            return false;
+        }
+    }
+
     public static function findByEmail ($email)
     {
         /**
@@ -165,7 +193,7 @@ class User
         // Speichert aktuelle Werte der Properties in die Datenbank
         $link = new DB();
 
-        $stmt = $link->prepare("INSERT INTO users SET email = ?, password = ?, username = ?");
+        $stmt = $link->prepare("INSERT INTO users SET email = ?, PASSWORD = ?, username = ?");
         $stmt->bind_param('sss', $this->email, $this->password, $this->username);
         $stmt->execute();
 

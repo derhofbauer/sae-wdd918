@@ -10,6 +10,32 @@ class Address
     public $address;
     public $user_id;
 
+    public static function find (int $id)
+    {
+        $link = new DB();
+
+        $stmt = $link->prepare("SELECT * FROM addresses WHERE id = ?");
+        $stmt->bind_param('i', $id);
+
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if ($result->num_rows === 1) {
+            $result = $result->fetch_all(MYSQLI_ASSOC)[0];
+
+            $address = new self();
+            $address->id = $result['id'];
+            $address->user_id = $result['user_id'];
+            $address->address = $result['address'];
+
+            return $address;
+        } elseif ($result->num_rows > 1) {
+            throw new Exception('Database broken!');
+        } else {
+            return false;
+        }
+    }
+
     public static function findByUserId (int $user_id)
     {
         $link = new DB();

@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Models\Address;
 use App\Models\Product;
+use App\Models\User;
 use Core\Libs\Formbuilder;
 use Core\Libs\Session;
 
@@ -93,4 +94,41 @@ class CheckoutController extends BaseController
         header("Location: ${baseUrl}checkout/check");
         exit;
     }
+
+    public function check ()
+    {
+        // Alle Produkte im Warenkorb (Session) aus der Datenbank abfragen
+        $cart = Session::get('cart');
+
+        $products = [];
+        $totalPrice = 0;
+
+        foreach ($cart as $productId => $quantity) {
+            $product = Product::find($productId);
+            $product->quantity = $quantity;
+            // Preis für die einzelnen Posten berechnen (Achtung: Quantity)
+            $product->totalPriceOfUnit = $product->price * $quantity;
+            $products[] = $product;
+
+            // Gesamtpreis berechnen
+            $totalPrice = $totalPrice + $product->totalPriceOfUnit;
+        }
+
+        $addressId = Session::get('use-address');
+        $address = Address::find($addressId);
+
+        $userId = Session::get('user_id');
+        $user = User::find($userId);
+
+        $params = [
+            'products' => $products,
+            'totalPrice' => $totalPrice,
+            'user' => $user,
+            'address' => $address
+        ];
+
+        // Übersicht ausgeben
+        $this->view->render('checkout-check', $params);
+    }
+
 }
