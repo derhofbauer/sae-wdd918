@@ -28,5 +28,7 @@ return [
     "/cart" => "CartController.list",
 
     "/checkout" => "CheckoutController.overview",
-    "/checkout/address" => "CheckoutController.showDeliveryAddressForm"
+    "/checkout/address" => "CheckoutController.showDeliveryAddressForm",
+    "/checkout/use-address" => "CheckoutController.useExistingAddress",
+    "/checkout/add-address" => "CheckoutController.addNewAddress"
 ];

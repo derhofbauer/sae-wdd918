@@ -35,4 +35,20 @@ class Address
 
         return $addresses;
     }
+
+    /**
+     * ACHTUNG: bisher aktualisieren alle save Methoden in den Models einen Datensatz. Diese hier erstellt einen neuen.
+     */
+    public function save ()
+    {
+        $link = new DB();
+
+        $stmt = $link->prepare("INSERT INTO addresses SET address = ?, user_id = ?");
+        $stmt->bind_param('si', $this->address, $this->user_id);
+
+        $stmt->execute();
+        $this->id = $stmt->insert_id;
+
+        return $this;
+    }
 }

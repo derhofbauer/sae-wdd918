@@ -68,12 +68,29 @@ class CheckoutController extends BaseController
     public function addNewAddress ()
     {
         // Neue Adresse speichern
+        $address = new Address();
+        $address->address = $_POST['address'];
+        $address->user_id = Session::get('user_id');
+        $address->save();
+
+        Session::add('use-address', $address->id);
+
         // Weiter im Checkout
+        $baseUrl = config('app.baseUrl');
+        header("Location: ${baseUrl}checkout/check");
+        exit;
     }
 
     public function useExistingAddress ()
     {
         // existierende ausgewählte Adresse irgendwo hin speichern (Session?)
+        $addressId = (int)$_POST['existing-address'];
+
+        Session::add('use-address', $addressId);
+
         // Weiter im Checkout
+        $baseUrl = config('app.baseUrl');
+        header("Location: ${baseUrl}checkout/check");
+        exit;
     }
 }
