@@ -131,4 +131,13 @@ class CheckoutController extends BaseController
         $this->view->render('checkout-check', $params);
     }
 
+    /**
+     * + Inhalt des Warenkorbs serialisieren und als "Order" in die DB speichern
+     * + Stock der einzelnen Produkte runter setzen
+     * + Rechnung generieren (Website Ansicht)
+     * + Dankeschön-Seite anzeigen
+     */
+    public function finish ()
+    {
+    }
 }

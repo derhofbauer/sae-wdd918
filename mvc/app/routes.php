@@ -32,4 +32,5 @@ return [
     "/checkout/use-address" => "CheckoutController.useExistingAddress",
     "/checkout/add-address" => "CheckoutController.addNewAddress",
     "/checkout/check" => "CheckoutController.check",
+    "/checkout/finish" => "CheckoutController.finish"
 ];
