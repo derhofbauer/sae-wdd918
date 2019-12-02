@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\Address;
+use App\Models\Order;
 use App\Models\Product;
 use App\Models\User;
 use Core\Libs\Formbuilder;
@@ -139,5 +140,23 @@ class CheckoutController extends BaseController
      */
     public function finish ()
     {
+        $order = Order::newFromCart();
+        $order->save();
+
+        foreach ($order->products as $product) {
+            $productFromDb = Product::find($product->id);
+
+            /**
+             * Wir können jetzt theoretisch einen negativen Lagerbestand erreichen. Grundsätzlich könnte auch abgefragt
+             * werden ob genug Waren im Lager sind, bevor die Order gespeichert wird.
+             */
+            $productFromDb->stock = $productFromDb->stock - $product->quantity;
+            $productFromDb->save();
+        }
+
+        $params = [
+            'order' => $order
+        ];
+        $this->view->render('checkout-thanks', $params);
     }
 }
