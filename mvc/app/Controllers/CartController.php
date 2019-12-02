@@ -10,7 +10,7 @@ class CartController extends BaseController
 
     public function list ()
     {
-        $cart = Session::get('cart');
+        $cart = Session::get('cart', []);
 
         // Zeige alle Produkte im Warenkorb in einem View an
         // Lies dazu alle produkt ids aus dem Warenkorb aus, hol dir die benötigten Informationen zu den Produkten

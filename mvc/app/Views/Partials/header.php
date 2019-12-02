@@ -39,13 +39,7 @@
                     <a href="cart" class="nav-link">Cart</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="index.php?page=imprint">Impressum</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="index.php?page=contact">Kontakt</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="index.php?page=categories">Kategorien</a>
+                    <a href="orders" class="nav-link">Orders</a>
                 </li>
             </ul>
 

@@ -154,6 +154,8 @@ class CheckoutController extends BaseController
             $productFromDb->save();
         }
 
+        Session::delete('cart');
+
         $params = [
             'order' => $order
         ];

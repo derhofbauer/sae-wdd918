@@ -2,7 +2,9 @@
 
 namespace App\Controllers;
 
+use App\Models\Invoice;
 use App\Models\Product;
+use Core\Libs\Session;
 
 class HomeController extends BaseController
 {
@@ -28,6 +30,17 @@ class HomeController extends BaseController
          * Template Loading starten
          */
         $this->view->render('home', $params);
+    }
+
+    public function orders ()
+    {
+        $user_id = Session::get('user_id');
+        $invoices = Invoice::findByUserId($user_id);
+
+        $params = [
+            'invoices' => $invoices
+        ];
+        $this->view->render('orders', $params);
     }
 
 }
