@@ -47,7 +47,7 @@ class HomeController extends BaseController
 
     public function sendEmail ()
     {
-        $to = "hofbauer.alexander@gmail.com";
+        $to = "arthur.dent@galaxy.com";
 
         if (PHPMailer::ValidateAddress($to)) {
             $mailer = new PHPMailer();

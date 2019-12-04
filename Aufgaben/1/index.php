@@ -34,8 +34,6 @@ if (isset($_GET['page'])) {
     require_once 'content/home.php';
 }
 
-// https://github.com/derhofbauer/sae-wdd918
-
 ?>
 
 <?php require_once 'partials/footer.php'; ?>
