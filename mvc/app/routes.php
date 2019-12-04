@@ -36,5 +36,8 @@ return [
 
     "/order/:id/invoice" => "InvoiceController.invoice",
     "/orders" => "HomeController.orders",
-    "/account/invoice/:id" => "InvoiceController.invoice"
+    "/account/invoice/:id" => "InvoiceController.invoice",
+
+    "/sendemail" => "HomeController.sendEmail",
+    "/pdf" => "HomeController.generatePDF"
 ];

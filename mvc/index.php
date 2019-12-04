@@ -13,6 +13,7 @@ use Core\Bootstrap;
  * Scope, damit sie überall verfügbar sind
  */
 require_once __DIR__ . '/core/helpers.php';
+require_once __DIR__ . '/vendor/autoload.php';
 
 /**
  * Autoloader

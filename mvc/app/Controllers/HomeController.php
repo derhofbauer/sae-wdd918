@@ -4,6 +4,8 @@ namespace App\Controllers;
 
 use App\Models\Invoice;
 use App\Models\Product;
+use App\Models\User;
+use Core\Libs\PHPMailer;
 use Core\Libs\Session;
 
 class HomeController extends BaseController
@@ -43,4 +45,34 @@ class HomeController extends BaseController
         $this->view->render('orders', $params);
     }
 
+    public function sendEmail ()
+    {
+        $to = "hofbauer.alexander@gmail.com";
+
+        if (PHPMailer::ValidateAddress($to)) {
+            $mailer = new PHPMailer();
+            $mailer->isMail();
+            $mailer->AddAddress($to);
+            $mailer->SetFrom('no-reply@sae-mvc.at');
+            $mailer->Subject = "SAE MVC Testmail";
+            $mailer->Body = "Super cooles Testmail! yay!";
+
+            $mailer->Send();
+
+            echo "success";
+        } else {
+            echo "fail :(";
+        }
+    }
+
+    public function generatePDF ()
+    {
+        $user_id = Session::get('user_id');
+        $user = User::find($user_id);
+
+        $mpdf = new \Mpdf\Mpdf();
+        $mpdf->WriteHTML('<h1>Invoice</h1>');
+        $mpdf->WriteHTML("<strong>{$user->email}</strong>");
+        $mpdf->Output();
+    }
 }
