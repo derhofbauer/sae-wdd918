@@ -38,6 +38,14 @@ return [
     "/orders" => "HomeController.orders",
     "/account/invoice/:id" => "InvoiceController.invoice",
 
+    /**
+     * Example Routes to demonstrate Mailing and PDF functionality
+     */
     "/sendemail" => "HomeController.sendEmail",
-    "/pdf" => "HomeController.generatePDF"
+    "/pdf" => "HomeController.generatePDF",
+
+    /**
+     * API Routes for AJAX calls
+     */
+    "/api/products" => "ApiController.products"
 ];
