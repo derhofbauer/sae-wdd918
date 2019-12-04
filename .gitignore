@@ -3,7 +3,7 @@
 # Edit at https://www.gitignore.io/?templates=sass,linux,macos,windows,composer,jetbrains+all
 
 ### Composer ###
-composer.phar
+#composer.phar
 /vendor/
 *vendor*
 

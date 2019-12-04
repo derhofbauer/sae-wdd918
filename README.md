@@ -11,6 +11,10 @@ Wer gerne Docker/Docker Compose nutzen möchte, findet ein entsprechendes File i
 ### Database
 + MariaDB: [localhost:3306](localhost:3306)
 
+### Composer
+
+Das MVC verwendet Composer. Wir haben die Bibliothek MPDF mittels Composer installiert. Um alle Abhängigkeiten nach dem Pull zu installieren führe im Terminal im Ordner `mvc` den Befehl `php composer.phar install` aus. Danach sollte ein Ordner angelegt werden mit dem Namen `vendor` und mehreren Inhalten. Bis dahin funktioniert das MVC möglicherweise nicht mehr.
+
 ## Nützliche Informationen & Links
 
 + PHP Docs: https://www.php.net/
