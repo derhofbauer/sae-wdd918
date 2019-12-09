@@ -47,7 +47,7 @@
                 <a href="login">Login</a> or <a href="signup">Signup</a>
             <?php else: ?>
                 <span>
-                    <?php echo $_SESSION['email']; ?>,
+                    <a href="user-settings"><?php echo $_SESSION['email']; ?></a>,
                 </span>
                 <a href="logout">Logout</a>
             <?php endif; ?>

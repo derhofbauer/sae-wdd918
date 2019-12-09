@@ -47,5 +47,11 @@ return [
     /**
      * API Routes for AJAX calls
      */
-    "/api/products" => "ApiController.products"
+    "/api/products" => "ApiController.products",
+
+    /**
+     * User Routes
+     */
+    "/user-settings" => "UserController.form",
+    "/user-settings/update" => "UserController.update"
 ];

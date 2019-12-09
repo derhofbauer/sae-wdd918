@@ -193,8 +193,22 @@ class User
         // Speichert aktuelle Werte der Properties in die Datenbank
         $link = new DB();
 
-        $stmt = $link->prepare("INSERT INTO users SET email = ?, PASSWORD = ?, username = ?");
+        $stmt = $link->prepare("INSERT INTO users SET email = ?, password = ?, username = ?");
         $stmt->bind_param('sss', $this->email, $this->password, $this->username);
+        $stmt->execute();
+
+        if ($returnAfterSave === true) {
+            return self::findByEmail($this->email);
+        }
+    }
+
+    public function update ($returnAfterSave = false)
+    {
+        // Speichert aktuelle Werte der Properties in die Datenbank
+        $link = new DB();
+
+        $stmt = $link->prepare("UPDATE users SET email = ?, password = ?, username = ? WHERE id = ?");
+        $stmt->bind_param('sssi', $this->email, $this->password, $this->username, $this->id);
         $stmt->execute();
 
         if ($returnAfterSave === true) {
