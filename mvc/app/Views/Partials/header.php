@@ -36,7 +36,7 @@
                     <a class="nav-link" href="index.php">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a href="cart" class="nav-link">Cart</a>
+                    <a href="cart" class="nav-link">Cart (<?php echo \App\Controllers\CartController::cartCount() ?>)</a>
                 </li>
                 <li class="nav-item">
                     <a href="orders" class="nav-link">Orders</a>

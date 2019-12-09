@@ -73,4 +73,21 @@ class CartController extends BaseController
         header("Location: ${baseUrl}cart");
         exit;
     }
+
+    public static function cartCount ()
+    {
+        $cart = Session::get('cart');
+
+        return array_sum($cart);
+
+        /**
+         * ODER:
+         *
+         * $sum = 0;
+         * foreach ($cart as $quantity) {
+         *      $sum += $quantity;
+         * }
+         * return $sum;
+         */
+    }
 }
