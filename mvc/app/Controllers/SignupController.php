@@ -12,20 +12,24 @@ class SignupController extends BaseController
 
     public function showForm ()
     {
-        $form = new Formbuilder("signup", config('app.baseUrl') . 'do-signup'); // http://localhost:8080/mvc/do-signup
-        $form
-            ->addInput('text', 'username', 'Username', ['placeholder' => "Username"])
-            ->addInput('email', 'email', 'Email *', ['placeholder' => "Email address", 'required' => 'true', 'autofocus' => 'true'])
-            ->addInput('password', 'password', 'Password *', ['placeholder' => 'Password', 'required' => 'true'])
-            ->addInput('password', 'password_repeat', 'Password (repeat) *', ['placeholder' => 'Please repeat the password', 'required' => 'true'])
-            ->addButton('submit', 'Sign up');
+        if (Session::get('logged_in', false) !== true) {
+            $form = new Formbuilder("signup", config('app.baseUrl') . 'do-signup'); // http://localhost:8080/mvc/do-signup
+            $form
+                ->addInput('text', 'username', 'Username', ['placeholder' => "Username"])
+                ->addInput('email', 'email', 'Email *', ['placeholder' => "Email address", 'required' => 'true', 'autofocus' => 'true'])
+                ->addInput('password', 'password', 'Password *', ['placeholder' => 'Password', 'required' => 'true'])
+                ->addInput('password', 'password_repeat', 'Password (repeat) *', ['placeholder' => 'Please repeat the password', 'required' => 'true'])
+                ->addButton('submit', 'Sign up');
 
-        $params = [
-            'form' => $form->output(),
-            'errors' => Session::get('errors', [])
-        ];
-        Session::delete('errors');
-        $this->view->render('signup-form', $params);
+            $params = [
+                'form' => $form->output(),
+                'errors' => Session::get('errors', [])
+            ];
+            Session::delete('errors');
+            $this->view->render('signup-form', $params);
+        } else {
+            die("Forbidden");
+        }
     }
 
     /**
