@@ -43,15 +43,23 @@ class CheckoutController extends BaseController
     public function showDeliveryAddressForm ()
     {
         // Ein Formular bauen (Formbuilder), mit dem man bestehende Adressen auswählen kann
-        $user_id = Session::get('user_id');
-        $existingAddresses = Address::findByUserId($user_id);
-        $addresses = [];
-        foreach ($existingAddresses as $existingAddress) {
-            $addresses[$existingAddress->id] = $existingAddress->address;
+        $user_id = Session::get('user_id', false);
+        $form_existing_html = false;
+
+        /**
+         * Show form with existing addresses only, when user is logged in
+         */
+        if ($user_id !== false) {
+            $existingAddresses = Address::findByUserId($user_id);
+            $addresses = [];
+            foreach ($existingAddresses as $existingAddress) {
+                $addresses[$existingAddress->id] = $existingAddress->address;
+            }
+            $form_existing = new Formbuilder('existing-address', 'checkout/use-address');
+            $form_existing->addSelect('existing-address', 'Choose existing address', $addresses);
+            $form_existing->addButton('select-address', 'Select this address');
+            $form_existing_html = $form_existing->output();
         }
-        $form_existing = new Formbuilder('existing-address', 'checkout/use-address');
-        $form_existing->addSelect('existing-address', 'Choose existing address', $addresses);
-        $form_existing->addButton('select-address', 'Select this address');
 
         // Ein Formular bauen (Formbuilder), mit dem man eine neue Adresse hinzufügen kann
         $form_new = new Formbuilder('new-address', 'checkout/add-address');
@@ -60,7 +68,7 @@ class CheckoutController extends BaseController
 
         // Formulare ausgeben
         $params = [
-            'formExistingAddresses' => $form_existing->output(),
+            'formExistingAddresses' => $form_existing_html,
             'formNewAddress' => $form_new->output()
         ];
         $this->view->render('checkout-address', $params);
