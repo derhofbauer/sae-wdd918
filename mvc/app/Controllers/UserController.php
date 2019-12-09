@@ -66,6 +66,8 @@ class UserController extends BaseController
                 }
 
                 $user->update();
+
+                Session::add('email', $user->email);
             } else {
                 Session::add('errors', $errors);
             }
