@@ -76,7 +76,7 @@ class CartController extends BaseController
 
     public static function cartCount ()
     {
-        $cart = Session::get('cart');
+        $cart = Session::get('cart', 0);
 
         return array_sum($cart);
 
