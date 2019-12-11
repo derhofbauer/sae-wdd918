@@ -41,6 +41,11 @@
                 <li class="nav-item">
                     <a href="orders" class="nav-link">Orders</a>
                 </li>
+                <?php if (\App\Models\User::isAdmin()): ?>
+                    <li class="nav-item">
+                        <a href="admin/orders" class="nav-link">Admin/Orders</a>
+                    </li>
+                <?php endif; ?>
             </ul>
 
             <?php if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true): ?>

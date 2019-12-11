@@ -38,6 +38,11 @@ return [
     "/orders" => "HomeController.orders",
     "/account/invoice/:id" => "InvoiceController.invoice",
 
+    "/admin/orders" => "AdminController.orders",
+    "/admin/orders/:id" => "AdminController.ordersForm",
+    "/admin/orders/:id/update" => "AdminController.ordersUpdate",
+    "/admin/orders/:orderid/set/:productid/:newquantity" => "AdminController.setProductQuantity",
+
     /**
      * Example Routes to demonstrate Mailing and PDF functionality
      */

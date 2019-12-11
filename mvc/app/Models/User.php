@@ -48,6 +48,29 @@ class User
         }
     }
 
+    public static function all ()
+    {
+        $link = new DB();
+
+        $stmt = $link->prepare("SELECT * FROM users");
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        $users = [];
+        while ($user = $result->fetch_assoc()) {
+            $u = new self();
+            $u->id = $user['id'];
+            $u->email = $user['email'];
+            $u->username = $user['username'];
+            $u->password = $user['password'];
+            $u->is_admin = $user['is_admin'];
+
+            $users[] = $u;
+        }
+
+        return $users;
+    }
+
     public static function findByEmail ($email)
     {
         /**
@@ -159,6 +182,14 @@ class User
     public static function isLoggedin ()
     {
         if (Session::get('logged_in') === true) {
+            return true;
+        }
+        return false;
+    }
+
+    public static function isAdmin ()
+    {
+        if (Session::get('is_admin') == true) {
             return true;
         }
         return false;
